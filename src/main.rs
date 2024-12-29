@@ -2,7 +2,7 @@ use std::io;
 
 fn main() {
     println!("=== JUAMP-R ===");
-    println!("Aktualna wersja: idk");
+    println!("Aktualna wersja: 0.1");
 
     // Gracz wybiera swoje imię i miasto
     println!("\nWpisz swoje imię:");
@@ -21,13 +21,10 @@ fn main() {
             "dom" => lokacja = w_dom(imie),
             "ulica" => lokacja = na_ulicy(imie),
             _ => {
-                println!("Nieoczekiwany błąd, gra się zakończyła.");
-                break;
+                panic!("Nieoczekiwany błąd, gra się zakończyła.");
             }
         }
     }
-
-    println!("Dzięki za grę, {}!", imie);
 }
 
 fn w_dom(imie: &str) -> &'static str {
@@ -64,7 +61,10 @@ fn na_ulicy(imie: &str) -> &'static str {
     io::stdin().read_line(&mut wybor).expect("Błąd odczytu");
     match wybor.trim() {
         "1" => {
-            println!("Spotykasz starszą osobę. Mówi ci: 'Dzień dobry, {}! Miło cię widzieć!'", imie);
+            println!(
+                "Spotykasz starszą osobę. Mówi ci: 'Dzień dobry, {}! Miło cię widzieć!'",
+                imie
+            );
             "ulica"
         }
         "2" => "dom",
